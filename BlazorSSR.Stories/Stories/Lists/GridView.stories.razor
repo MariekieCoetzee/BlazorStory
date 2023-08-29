@@ -1,0 +1,80 @@
+@attribute [Stories("Pages/GridView")]
+
+<Stories TComponent="GridView">
+    <ArgType For="_ => _!.AlignDate"
+             Control="ControlType.Select" />
+    <ArgType For="_ => _!.AlignTempC"
+             Control="ControlType.Select" />
+    <ArgType For="_ => _!.AlignTempF"
+             Control="ControlType.Select" />
+    <ArgType For="_ => _!.AlignSummary"
+             Control="ControlType.Select" />
+    <ArgType For="_ => _!.AlignDate"
+             Control="ControlType.Select" />
+    <ArgType For="_ => _!.TableTheme"
+             Control="ControlType.Select" />
+    <ArgType For="_ => _!.Color"
+             Control="ControlType.Color" />
+
+    <Story Name="Default">
+        <Arguments>
+            <Arg For="_=> _!.AlignDate" Value="GridView.AlignEnum.Center"></Arg>
+        </Arguments>
+        <Template>
+            <GridView AlignDate="GridView.AlignEnum.Center"
+                      AlignSummary="GridView.AlignEnum.Left"
+                      AlignTempC="GridView.AlignEnum.Left"
+                      AlignTempF="GridView.AlignEnum.Right"
+                      Color="#d1d0d2"
+                      EnableSearch="false"
+                      DateFormat="yyyy-MM-dd"
+                      TableTheme="GridView.TableThemeEnum.Default"
+                      SortDate="false"
+                      SortSummary="false"
+                      SortTempC="false"
+                      SortTempF="false"
+                      EnableTemplate="false"
+                      @attributes="context.Args">
+            </GridView>
+        </Template>
+    </Story>
+    <Story Name="Enable Search">
+        <Template>
+            <GridView EnableSearch="true"
+                      Color="#b696af"
+                       TableTheme="GridView.TableThemeEnum.Default"
+                      @attributes="context.Args">
+            </GridView>
+        </Template>
+    </Story>
+    <Story Name="Enable Sorting">
+        <Template>
+            <GridView SortDate="true"
+                      SortSummary="true"
+                      SortTempC="true"
+                      SortTempF="true"
+                      Color="#459685"
+                      TableTheme="GridView.TableThemeEnum.Invert"
+                      @attributes="context.Args">
+            </GridView>
+        </Template>
+    </Story>
+    <Story Name="Enable Template">
+        <Template>
+            <GridView EnableTemplate="true"
+                      Color="#968545"
+                      TableTheme="GridView.TableThemeEnum.Invert"
+                      @attributes="context.Args">
+            </GridView>
+        </Template>
+    </Story>
+            <Story Name="Enable Pagination">
+                <Template>
+                    <GridView EnablePaging="true"
+                              Color="#854596"
+                               TableTheme="GridView.TableThemeEnum.Invert"
+                              @attributes="context.Args">
+                    </GridView>
+                </Template>
+            </Story>
+</Stories>
