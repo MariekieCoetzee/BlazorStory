@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using StoriesPlaywright.Test.Infrastructure;
 
 namespace StoriesPlaywright.Test;
@@ -6,6 +7,62 @@ namespace StoriesPlaywright.Test;
 [TestFixture]
 public class QuickgridTest : BlazorTest
 {
+    [Test]
+    public async Task ChangeColor_ShouldChange_BackgroundColor()
+    {
+        await Page.GotoAsync(RootUri.AbsoluteUri);
+        await Page.GetByRole(AriaRole.Button, new() { Name = "Quickgrid" }).ClickAsync();
+        await Page.GetByRole(AriaRole.Link, new() { Name = "Default" }).Nth(1).ClickAsync();
+        var app = Page.FrameLocator("iframe").Locator("#app");
+
+        await app.Locator(".quickgrid")
+            .WaitForAsync(new LocatorWaitForOptions() { State = WaitForSelectorState.Attached });
+
+        await Page.FrameLocator("iframe").Locator("body").PressAsync("F12");
+
+        await Page.Locator("input[type=\"color\"]").ClickAsync();
+
+        await Page.Locator("input[type=\"color\"]").FillAsync("#4c97bd");
+
+        await Expect(app.Locator(".container")).ToHaveCSSAsync("background-color", "rgb(76, 151, 189)");
+    }
+    
+    [Test]
+    public async Task ChangeTheme_ShouldChange_Theme()
+    {
+        await Page.GotoAsync(RootUri.AbsoluteUri);
+        await Page.GetByRole(AriaRole.Button, new() { Name = "Quickgrid" }).ClickAsync();
+        await Page.GetByRole(AriaRole.Link, new() { Name = "Default" }).Nth(1).ClickAsync();
+        var app = Page.FrameLocator("iframe").Locator("#app");
+
+        await app.Locator(".quickgrid")
+            .WaitForAsync(new LocatorWaitForOptions() { State = WaitForSelectorState.Attached });
+
+        await Page.GetByRole(AriaRole.Row, new() { Name = "TableTheme" }).GetByRole(AriaRole.Combobox)
+            .SelectOptionAsync(new[] { "Invert" });
+        
+        await Expect(app.Locator(".quickgrid")).ToHaveAttributeAsync("theme", "invert");
+    }
+    
+    [Test]
+    public async Task SelectAlignRight_ShouldAlign_ContentsRight()
+    {
+        await Page.GotoAsync(RootUri.AbsoluteUri);
+        await Page.GetByRole(AriaRole.Button, new() { Name = "Quickgrid" }).ClickAsync();
+        await Page.GetByRole(AriaRole.Link, new() { Name = "Default" }).Nth(1).ClickAsync();
+        var app = Page.FrameLocator("iframe").Locator("#app");
+
+        await app.Locator(".quickgrid")
+            .WaitForAsync(new LocatorWaitForOptions() { State = WaitForSelectorState.Attached });
+       
+        await Page.GetByRole(AriaRole.Row, new() { Name = "AlignTempC" }).GetByRole(AriaRole.Combobox)
+            .SelectOptionAsync(new[] { "Right" });
+
+        var columnAlignment= Page.FrameLocator("iframe").GetByRole(AriaRole.Columnheader, new() { Name = "Temperature Celsius" });
+
+        await Expect(columnAlignment).ToHaveClassAsync(new Regex("col-justify-end"));
+    }
+    
     [Test]
     public async Task NumberOfRows_ShouldBe_5()
     {
@@ -26,7 +83,7 @@ public class QuickgridTest : BlazorTest
     }
 
     [Test]
-    public async Task EnableSearch_ShouldReturn_1()
+    public async Task SearchForWarm_ShouldReturn_1_Item()
     {
         // // Ensure that the client project is running
         // await Page.PauseAsync();
@@ -54,7 +111,7 @@ public class QuickgridTest : BlazorTest
     }
 
     [Test]
-    public async Task EnableSort_Should_SortTable()
+    public async Task EnableSort_Should_SortTableOnClick()
     {
         await Page.GotoAsync(RootUri.AbsoluteUri);
 
@@ -99,7 +156,7 @@ public class QuickgridTest : BlazorTest
     }
 
     [Test]
-    public async Task EnablePagination_Should_UpdateNrOfPages()
+    public async Task UpdateNrOfItemsPerPage_Should_UpdateNrOfPages()
     {
         await Page.GotoAsync(RootUri.AbsoluteUri);
 
