@@ -11,12 +11,7 @@ public class BlazorTest : PageTest
     [SetUp]
     public async Task BlazorSetup()
     {
-        _httpClient = _webApplicationFactory.CreateClient(
-            new()
-            {
-                BaseAddress = RootUri,
-            }
-        );
+        _httpClient = _webApplicationFactory.CreateClient();
 
         await Context.RouteAsync(
             $"{RootUri.AbsoluteUri}**", async route =>
@@ -57,5 +52,5 @@ public class BlazorTest : PageTest
     public void BlazorTearDown()
     {
         _httpClient?.Dispose();
+        }
     }
-}
