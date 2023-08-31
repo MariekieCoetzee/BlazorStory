@@ -4,15 +4,15 @@ namespace StoriesPlaywright.Test;
 
 [Parallelizable(ParallelScope.Self)]
 [TestFixture]
-public class QuickgridTest : PageTest
+public class QuickgridTest : BlazorTest
 {
     [Test]
     public async Task NumberOfRows_ShouldBe_5()
     {
         // Ensure that the client project is running
-        await Page.PauseAsync();
-        await Page.GotoAsync("https://localhost:7297/?path=/docs/example-button--docs");
-
+        // await Page.PauseAsync();
+        // await Page.GotoAsync("https://localhost:7297/?path=/docs/example-button--docs");
+        await Page.GotoAsync(RootUri.AbsoluteUri);
         await Page.GetByRole(AriaRole.Button, new() { Name = "Quickgrid" }).ClickAsync();
         await Page.GetByRole(AriaRole.Link, new() { Name = "Default" }).Nth(1).ClickAsync();
         var app =  Page.FrameLocator("iframe").Locator("#app");
@@ -28,9 +28,9 @@ public class QuickgridTest : PageTest
     [Test]
     public async Task EnableSearch_ShouldReturn_1()
     {
-        // Ensure that the client project is running
-        await Page.PauseAsync();
-        await Page.GotoAsync("https://localhost:7297/?path=/docs/example-button--docs");
+        // // Ensure that the client project is running
+        // await Page.PauseAsync();
+        await Page.GotoAsync(RootUri.AbsoluteUri);
 
         await Page.GetByRole(AriaRole.Button, new() { Name = "Quickgrid" }).ClickAsync();
         await Page.GetByRole(AriaRole.Link, new() { Name = "Enable Search" }).ClickAsync();
@@ -56,9 +56,7 @@ public class QuickgridTest : PageTest
     [Test]
     public async Task EnableSort_Should_SortTable()
     {
-        await Page.GotoAsync("https://localhost:7297/");
-
-        await Page.GotoAsync("https://localhost:7297/?path=/docs/example-button--docs");
+        await Page.GotoAsync(RootUri.AbsoluteUri);
 
         await Page.GetByRole(AriaRole.Button, new() { Name = "Quickgrid" }).ClickAsync();
 
@@ -86,9 +84,7 @@ public class QuickgridTest : PageTest
     [Test]
     public async Task EnableTemplate_Should_AddTemplateToGrid()
     {
-        await Page.GotoAsync("https://localhost:7297/");
-
-        await Page.GotoAsync("https://localhost:7297/?path=/docs/example-button--docs");
+        await Page.GotoAsync(RootUri.AbsoluteUri);
 
         await Page.GetByRole(AriaRole.Button, new() { Name = "Quickgrid" }).ClickAsync();
 
@@ -105,9 +101,7 @@ public class QuickgridTest : PageTest
     [Test]
     public async Task EnablePagination_Should_UpdateNrOfPages()
     {
-        await Page.GotoAsync("https://localhost:7297/");
-
-        await Page.GotoAsync("https://localhost:7297/?path=/docs/example-button--docs");
+        await Page.GotoAsync(RootUri.AbsoluteUri);
 
         await Page.GetByRole(AriaRole.Button, new() { Name = "Quickgrid" }).ClickAsync();
 

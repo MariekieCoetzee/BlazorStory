@@ -2,6 +2,7 @@ namespace StoriesPlaywright.Test.Infrastructure;
 
 public class BlazorTest : PageTest
 {
+
     protected static readonly Uri RootUri = new("http://127.0.0.1");
 
     private readonly WebApplicationFactory<Program> _webApplicationFactory = new();
