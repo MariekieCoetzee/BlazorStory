@@ -1,6 +1,4 @@
-﻿@page "/weather"
-@attribute [StreamRendering(true)]
-
+﻿<div class="container bg-white">
 <PageTitle>Table</PageTitle>
 
 <h1>Table</h1>
@@ -35,7 +33,7 @@ else
         </tbody>
     </table>
 }
-
+</div>
 @code {
     private static readonly string[] Summaries = new[]
     {

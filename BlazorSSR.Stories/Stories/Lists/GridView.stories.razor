@@ -1,6 +1,6 @@
-@attribute [Stories("Pages/GridView")]
+@attribute [Stories("Pages/Quickgrid")]
 
-<Stories TComponent="GridView">
+<Stories TComponent="Quickgrid">
     <ArgType For="_ => _!.AlignDate"
              Control="ControlType.Select" />
     <ArgType For="_ => _!.AlignTempC"
@@ -13,29 +13,68 @@
              Control="ControlType.Select" />
     <ArgType For="_ => _!.TableTheme"
              Control="ControlType.Select" />
-    <ArgType For="_ => _!.Color" 
+    <ArgType For="_ => _!.Color"
              Control="ControlType.Color" />
-    
+
     <Story Name="Default">
         <Arguments>
-            <Arg For="_=> _!.AlignDate" Value="GridView.AlignEnum.Left"></Arg>
+            <Arg For="_=> _!.AlignDate" Value="Quickgrid.AlignEnum.Center"></Arg>
         </Arguments>
         <Template>
-            <GridView AlignDate="GridView.AlignEnum.Left" 
-                      AlignSummary="GridView.AlignEnum.Left"
-                      AlignTempC="GridView.AlignEnum.Left"
-                      AlignTempF="GridView.AlignEnum.Right"
-                      Color="#d1d0d2" 
+            <Quickgrid AlignDate="Quickgrid.AlignEnum.Center"
+                      AlignSummary="Quickgrid.AlignEnum.Left"
+                      AlignTempC="Quickgrid.AlignEnum.Left"
+                      AlignTempF="Quickgrid.AlignEnum.Right"
+                      Color="#d1d0d2"
                       EnableSearch="false"
                       DateFormat="yyyy-MM-dd"
-                      TableTheme="GridView.TableThemeEnum.Default"
+                      TableTheme="Quickgrid.TableThemeEnum.Default"
                       SortDate="false"
                       SortSummary="false"
                       SortTempC="false"
                       SortTempF="false"
+                      EnableTemplate="false"
                       @attributes="context.Args">
-            </GridView>
+            </Quickgrid>
         </Template>
     </Story>
-
+    <Story Name="Enable Search">
+        <Template>
+            <Quickgrid EnableSearch="true"
+                      Color="#b696af"
+                       TableTheme="Quickgrid.TableThemeEnum.Default"
+                      @attributes="context.Args">
+            </Quickgrid>
+        </Template>
+    </Story>
+    <Story Name="Enable Sorting">
+        <Template>
+            <Quickgrid SortDate="true"
+                      SortSummary="true"
+                      SortTempC="true"
+                      SortTempF="true"
+                      Color="#459685"
+                      TableTheme="Quickgrid.TableThemeEnum.Invert"
+                      @attributes="context.Args">
+            </Quickgrid>
+        </Template>
+    </Story>
+    <Story Name="Enable Template">
+        <Template>
+            <Quickgrid EnableTemplate="true"
+                      Color="#968545"
+                      TableTheme="Quickgrid.TableThemeEnum.Invert"
+                      @attributes="context.Args">
+            </Quickgrid>
+        </Template>
+    </Story>
+            <Story Name="Enable Pagination">
+                <Template>
+                    <Quickgrid EnablePaging="true"
+                              Color="#854596"
+                               TableTheme="Quickgrid.TableThemeEnum.Invert"
+                              @attributes="context.Args">
+                    </Quickgrid>
+                </Template>
+            </Story>
 </Stories>

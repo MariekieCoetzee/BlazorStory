@@ -1,0 +1,277 @@
+<div class="container pb-2 "
+     style="background-color: @Color">
+
+    <h3 class="text-center font-weight-light p-2"
+        style="filter:@(TableTheme == TableThemeEnum.Invert ? "invert(1)" : "invert(0)")">
+         Quick Grid
+    </h3>
+    @if (EnablePaging)
+    {
+        <div class="form-floating mb-3">
+            <input type="number"
+                   class="form-control"
+                   id="numberOfPages"
+                   @bind="@pagination.ItemsPerPage"
+                   placeholder="2"
+                   min="1"
+                   max="5">
+            <label for="numberOfPages">Number of items per page</label>
+        </div>
+    }
+    @if (_forecasts != null)
+    {
+        <QuickGrid Items=@_forecasts
+                   Pagination="@pagination"
+                   Class="table table-striped table-bordered table-hover table-sm"
+                   Theme="@(TableTheme == TableThemeEnum.Invert ? "invert" : "default")">
+            <PropertyColumn Property=@(f => f.Date)
+                            Sortable="@SortDate"
+                            Align="@((Align)AlignDate)"
+                            Format="@DateFormat">
+            </PropertyColumn>
+            <PropertyColumn Title="Temperature Celsius"
+                            Property=@(f => f.TemperatureC)
+                            Sortable="@SortTempC"
+                            Align="@((Align)AlignTempC)"
+                            Format='@("0 °C")' />
+            <PropertyColumn Title="Temperature Fahrenheit"
+                            Property=@(f => f.TemperatureF)
+                            Sortable="@SortTempF"
+                            Align="@((Align)AlignTempF)"
+                            Format='@("0 °F")' />
+            @if (EnableTemplate)
+            {
+                <TemplateColumn Title="Temp">
+                    <div class="flex items-center">
+                        @switch (context.Summary)
+                        {
+                            case "Freezing":
+                                <i class="bi bi-thermometer-low"></i>
+                                break;
+                            case "Snow":
+                                <i class="bi bi-thermometer-snow"></i>
+                                break;
+                            case "Chilly":
+                                <i class="bi bi-cloud-sleet"></i>
+                                break;
+                            case "Cool":
+                                <i class="bi bi-cloud-snow"></i>
+                                break;
+                            case "Mild":
+                                <i class="bi bi-thermometer-half"></i>
+                                break;
+                            case "Warm":
+                                <i class="bi bi-brightness-low-fill"></i>
+                                break;
+                            case "Balmy":
+                                <i class="bi bi-emoji-sunglasses"></i>
+                                break;
+                            case "Hot":
+                                <i class="bi bi-thermometer"></i>
+                                break;
+                            case "Sweltering":
+                                <i class="bi bi-thermometer-high"></i>
+                                break;
+                            case "Scorching":
+                                <i class="bi bi-fire"></i>
+                                break;
+                            default:
+                                <i class="bi bi-thermometer"></i>
+                                break;
+                        }
+                    </div>
+                </TemplateColumn>
+            }
+
+            @if (EnableSearch)
+            {
+                <PropertyColumn Property=@(f => f.Summary)
+                                Sortable="@SortSummary"
+                                Align="@((Align)AlignSummary)">
+                    <ColumnOptions>
+                        <div class="search-box">
+                            <i class="bi bi-search"></i>
+                            <input type="search"
+                                   class="search-box-input ps-1"
+                                   autofocus
+                                   @bind="_summaryFilter"
+                                   placeholder="Search ..."
+                                   @bind:after="OnSearch" />
+                        </div>
+                    </ColumnOptions>
+                </PropertyColumn>
+            }
+            else
+            {
+                <PropertyColumn Property=@(f => f.Summary)
+                                Sortable="@SortSummary"
+                                Align="@((Align)AlignSummary)" />
+            }
+        </QuickGrid>
+    }
+
+    @if (EnablePaging)
+    {
+        <Paginator State="@pagination" />
+    }
+
+</div>
+
+@code {
+
+    PaginationState pagination = new PaginationState();
+
+    /// <summary>
+    /// Summarised temperatures
+    /// </summary>
+    public enum TempEnum
+    {
+        Freezing,
+        Snow,
+        Chilly,
+        Cool,
+        Mild,
+        Warm,
+        Balmy,
+        Hot,
+        Sweltering,
+        Scorching
+    }
+
+    public enum AlignEnum
+    {
+        Left = 0,
+        Center = 1,
+        Right = 2,
+        End = 3,
+        Start = 4
+    }
+
+    public enum TableThemeEnum
+    {
+        Default,
+        Invert
+    }
+
+    /// <summary>
+    /// Align date field
+    /// </summary>
+    [Parameter]
+    public AlignEnum AlignDate { get; set; }
+
+    /// <summary>
+    /// Align temp c field
+    /// </summary>
+    [Parameter]
+    public AlignEnum AlignTempC { get; set; }
+
+    /// <summary>
+    /// Align temp F field
+    /// </summary>
+    [Parameter]
+    public AlignEnum AlignTempF { get; set; }
+
+    /// <summary>
+    /// Align summary field
+    /// </summary>
+    [Parameter]
+    public AlignEnum AlignSummary { get; set; }
+
+    /// <summary>
+    /// Enable search feature on Summary
+    /// </summary>
+    [Parameter]
+    public bool EnableSearch { get; set; }
+
+    /// <summary>
+    /// Enable template - images in column 
+    /// </summary>
+    [Parameter]
+    public bool EnableTemplate { get; set; }
+
+    /// <summary>
+    /// Enable Paging - Specify number of items per page 
+    /// </summary>
+    [Parameter]
+    public bool EnablePaging { get; set; }
+
+    /// <summary>
+    /// Format display of Date
+    /// yyyy - year
+    /// MM - month
+    /// dd - day
+    /// e.g. MM/dd/yyyy
+    /// </summary>
+    [Parameter]
+    public string DateFormat { get; set; } = "yyyy-MM-dd";
+
+    /// <summary>
+    /// Select theme of table
+    /// </summary>
+    [Parameter]
+    public TableThemeEnum TableTheme { get; set; }
+
+    /// <summary>
+    /// Set a color of the button.
+    /// </summary>
+    [Parameter]
+    public string Color { get; set; } = "#007bff";
+
+    /// <summary>
+    /// Sort Date field
+    /// </summary>
+    [Parameter]
+    public bool SortDate { get; set; }
+
+    /// <summary>
+    /// Boolean to sort Temp C  field
+    /// </summary>
+    [Parameter]
+    public bool SortTempC { get; set; }
+
+    /// <summary>
+    /// Boolean to sort Temp F field
+    /// </summary>
+    [Parameter]
+    public bool SortTempF { get; set; }
+
+    /// <summary>
+    /// Boolean to sort Summary field
+    /// </summary>
+    [Parameter]
+    public bool SortSummary { get; set; }
+
+    record WeatherForecast(DateOnly Date, int TemperatureC, int TemperatureF, string? Summary);
+
+    IQueryable<WeatherForecast> _forecasts = null;
+
+    private string? _summaryFilter;
+    private bool _showCelsius;
+
+    /// <summary>
+    /// Initialising method
+    /// </summary>
+    protected override async Task OnInitializedAsync()
+    {
+    // Simulate retrieving the data asynchronously.
+    // await Task.Delay(3000);
+
+        var startDate = DateOnly.FromDateTime(DateTime.Now);
+
+
+        pagination = EnablePaging ? new PaginationState { ItemsPerPage = 2 } : new PaginationState { ItemsPerPage = 5 };
+
+        _forecasts = Enumerable.Range(1, 7).Select(index =>
+                                                       new WeatherForecast(startDate.AddDays(index),
+                                                                           Random.Shared.Next(-20, 55),
+                                                                           32 + (int)(Random.Shared.Next(-20, 55) / 0.5556),
+                                                                           Enum.GetName(typeof(TempEnum), index))).AsQueryable();
+    }
+
+    private void OnSearch()
+    {
+        _forecasts = _forecasts.Where(x => _summaryFilter != null && x.Summary!.ToLower().Contains(_summaryFilter.ToLower()));
+        StateHasChanged();
+    }
+
+}

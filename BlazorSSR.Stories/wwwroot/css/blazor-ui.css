@@ -87,23 +87,3 @@
         color: #c9cdcf;
     }
 }
-
-.quickgrid[theme=invert] {
-    filter: invert(1);
-}
-
-.quickgrid[theme=invert] .col-title {
-    filter: invert(1);
-}
-
-.quickgrid[theme=invert] .col-title-text {
-    filter: invert(1);
-}
-
-.quickgrid[theme=invert] .sort-indicator {
-    filter: invert(1);
-}
-
-.quickgrid[theme=invert] .col-options {
-    filter: invert(1);
-}
