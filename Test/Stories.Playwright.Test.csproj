@@ -7,6 +7,7 @@
     <PreserveCompilationContext>true</PreserveCompilationContext>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
+    <RootNamespace>StoriesPlaywright.Test</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

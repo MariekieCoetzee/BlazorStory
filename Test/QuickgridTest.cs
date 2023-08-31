@@ -66,9 +66,6 @@ public class QuickgridTest : BlazorTest
     [Test]
     public async Task NumberOfRows_ShouldBe_5()
     {
-        // Ensure that the client project is running
-        // await Page.PauseAsync();
-        // await Page.GotoAsync("https://localhost:7297/?path=/docs/example-button--docs");
         await Page.GotoAsync(RootUri.AbsoluteUri);
         await Page.GetByRole(AriaRole.Button, new() { Name = "Quickgrid" }).ClickAsync();
         await Page.GetByRole(AriaRole.Link, new() { Name = "Default" }).Nth(1).ClickAsync();
@@ -85,8 +82,6 @@ public class QuickgridTest : BlazorTest
     [Test]
     public async Task SearchForWarm_ShouldReturn_1_Item()
     {
-        // // Ensure that the client project is running
-        // await Page.PauseAsync();
         await Page.GotoAsync(RootUri.AbsoluteUri);
 
         await Page.GetByRole(AriaRole.Button, new() { Name = "Quickgrid" }).ClickAsync();
