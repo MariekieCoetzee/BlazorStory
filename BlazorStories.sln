@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 #
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor.Stories", "BlazorSSR.Stories\Blazor.Stories.csproj", "{9D02916B-0684-4F5C-BF5A-82F9899DB9FB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor.Stories", "Blazor.Stories\Blazor.Stories.csproj", "{9D02916B-0684-4F5C-BF5A-82F9899DB9FB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stories.Playwright.Test", "Test\Stories.Playwright.Test.csproj", "{2AD8A623-BA55-46B1-89CD-363D4E1C27BE}"
 EndProject
