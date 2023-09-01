@@ -1,0 +1,21 @@
+@attribute [Stories("Pages/PlaceHolder")]
+
+<Stories TComponent="PlaceHolder">
+    <ArgType For="_ => _!.Color"
+             Control="ControlType.Color" />
+    <ArgType For="_ => _!.TextColor"
+             Control="ControlType.Color" />
+    <ArgType For="_ => _!.PlaceHolderColor"
+             Control="ControlType.Color" />
+    
+    <Story Name="Default">
+        <Template>
+            <PlaceHolder Color="#0d6efd" TextColor="#fff"
+                         PlaceHolderColor="#fff" 
+                         NumberOfColumns=4
+                         NumberOfRows=4
+                         @attributes="context.Args"></PlaceHolder>
+        </Template>
+    </Story>
+
+</Stories>

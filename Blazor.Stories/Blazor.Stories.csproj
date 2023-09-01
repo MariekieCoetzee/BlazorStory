@@ -16,4 +16,8 @@
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.0-preview.7.*" PrivateAssets="all"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Components\Forms\" />
+    </ItemGroup>
+
 </Project>

@@ -1,0 +1,77 @@
+<div class="container mt-1 "
+     style="background-color: @Color; color: @TextColor" >
+    <h3>Loading...</h3>
+    <table class="table" style=" color: @TextColor">
+        <thead>
+        <tr>   
+            @for (int i = 0; i < NumberOfColumns; i++)
+            {
+                  <th scope="col">Heading @i</th>
+            }
+            
+        </tr>
+        </thead>
+        <tbody class="placeholder-glow">
+        @for (int i = 0; i < NumberOfRows; i++)
+        {
+            <tr>
+                @for (int col = 0; col < NumberOfColumns; col++)
+                {
+                    <td>
+                        <span class="placeholder @_placeHolderWidthArray[_picker.Next(_placeHolderWidthArray.Length)]"
+                              style="background-color: @PlaceHolderColor">
+                        </span>
+                    </td>
+                }
+            </tr>
+        }
+        </tbody>
+    </table>
+
+
+</div>
+
+@code {
+
+    /// <summary>
+    /// Set a color of the background.
+    /// </summary>
+    [Parameter]
+    public string Color { get; set; } = "#0d6efd";
+
+    /// <summary>
+    /// Set the color of the text.
+    /// </summary>
+    [Parameter]
+    public string TextColor { get; set; } = "#fff";
+
+    /// <summary>
+    /// Set the color of the placeholder.
+    /// </summary>
+    [Parameter]
+    public string PlaceHolderColor { get; set; } = "#fff";
+
+    /// <summary>
+    /// Set the number of Columns.
+    /// Maximum is 10, if greater than 10 it will default back 10
+    /// </summary>
+    [Parameter]
+    public int NumberOfColumns { get; set; } = 4;
+
+    /// <summary>
+    /// Set the number of Rows.
+    /// Maximum is 10, if greater than 10 it will default back 10
+    /// </summary>
+    [Parameter]
+    public int NumberOfRows { get; set; } = 4;
+    
+    private string[] _placeHolderWidthArray = { "w-25","w-50","w-75" };
+    Random _picker = new Random();
+
+    protected override void OnParametersSet()
+    {
+        NumberOfColumns = NumberOfColumns > 10 ? 10 : NumberOfColumns;
+        NumberOfRows = NumberOfRows > 10 ? 10 : NumberOfRows;
+    }
+    
+}

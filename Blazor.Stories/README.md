@@ -1,7 +1,8 @@
 # BlazorStory
 
-This repository, derived from [jsakamoto](https://github.com/jsakamoto/BlazingStory/)'s ingenious work on [BlazingStory](https://github.com/jsakamoto/BlazingStory/), draws inspiration from Storybook, 
-the well known tool for UI development in the JavaScript ecosystem. BlazorStory brings the 
+This repository, derived from [jsakamoto](https://github.com/jsakamoto/BlazingStory/)'s ingenious work on 
+[BlazingStory](https://github.com/jsakamoto/BlazingStory/), draws inspiration from 
+[Storybook](https://storybook.js.org/), the well known tool for UI development in the JavaScript ecosystem. BlazorStory brings the 
 power of component isolation to Blazor, revolutionizing the way we build UI pages and components.
 
 ## Component Isolation for Speedy Development
