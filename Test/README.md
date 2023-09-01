@@ -3,12 +3,9 @@
 This project is inspired by the insights shared during one of 
 [Microsoft's community stand-ups](https://www.youtube.com/watch?v=lJa3YlUliEs).  During the session Mackinnon Buck,
 Microsoft developer, shared a [repository](https://github.com/MackinnonBuck/blazor-playwright-example) 
-that forms the basis of this project.  
+that forms the basis of this project.
 
----
-Note : This project caters specifically to Blazor WebAssembly (Wasm) projects.
-
----
+>Note : This project caters specifically to Blazor WebAssembly (Wasm) projects.
 
 # Introduction to Playwright
 This project hosts the end-to-end tests that validate the functionality of the Blazing Story solution.
