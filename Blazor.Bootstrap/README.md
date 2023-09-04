@@ -1,8 +1,10 @@
-# BlazorStory
+# Blazor Bootstrap
 
-This repository, derived from [jsakamoto](https://github.com/jsakamoto/BlazingStory/)'s ingenious work on 
-[BlazingStory](https://github.com/jsakamoto/BlazingStory/), draws inspiration from 
-[Storybook](https://storybook.js.org/), the well known tool for UI development in the JavaScript ecosystem. BlazorStory brings the 
+This project is created on a template created by [jsakamoto](https://github.com/jsakamoto/BlazingStory/)'s 
+ingenious work on [BlazingStory](https://github.com/jsakamoto/BlazingStory/) and Bootstrap as the CSS framework.  
+The template, BlazingStory, draws inspiration from 
+[Storybook](https://storybook.js.org/), the well known tool for UI development in the JavaScript ecosystem. 
+BlazingStory template brings the 
 power of component isolation to Blazor, revolutionizing the way we build UI pages and components.
 
 ## Component Isolation for Speedy Development
@@ -21,7 +23,8 @@ The client project is developed with the following tech & libraries :
 - **Microsoft QuickGrid**
 
 # Getting Started
-1. **Run the Application**: Navigate to the `Blazor.Stories` project folder using your preferred integrated development
+1. **Run the Application**: Navigate to the `Blazor.Bootstrap` project folder using your preferred integrated 
+   development
    environment (IDE) or the command-line interface (CLI).
     Using the command line, initiate the application with the following command:
     ```bash
@@ -35,4 +38,5 @@ This repo includes a couple of features :
 - **QuickGrid Component**: Discover the QuickGrid component, enhanced with all the features made available in the .NET 8
 Preview release. 
 - Table
+- Placeholder : Ghost image of a table while it is loading
 - Button
