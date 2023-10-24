@@ -18,6 +18,4 @@ app.MapFallbackToFile("index.html");
 app.Run();
 
 // Make the implicit Program class public so test projects can access it
-public abstract partial class Program
-{
-}
+public abstract partial class Program;
