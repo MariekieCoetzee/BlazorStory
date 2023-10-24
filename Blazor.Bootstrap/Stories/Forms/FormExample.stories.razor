@@ -1,0 +1,17 @@
+@attribute [Stories("Forms/FormExample")]
+
+<Stories TComponent="FormExample">
+        <ArgType For="_ => _!.Color"
+                 Control="ControlType.Color" />
+    <Story Name="Default">
+
+        <Template>
+            <FormExample Color="#d1d0d2"
+                         TableTheme="StoryHelpers.TableThemeEnum.Default"
+                         @attributes="context.Args">
+            </FormExample>
+        </Template>
+    </Story>
+
+
+</Stories>

@@ -2,7 +2,7 @@
      style="background-color: @Color">
 
     <h3 class="text-center font-weight-light p-2"
-        style="filter:@(TableTheme == TableThemeEnum.Invert ? "invert(1)" : "invert(0)")">
+        style="filter:@(TableTheme == StoryHelpers.TableThemeEnum.Invert ? "invert(1)" : "invert(0)")">
          Quick Grid
     </h3>
     @if (EnablePaging)
@@ -23,7 +23,7 @@
         <QuickGrid Items=@_forecasts
                    Pagination="@pagination"
                    Class="table table-striped table-bordered table-hover table-sm"
-                   Theme="@(TableTheme == TableThemeEnum.Invert ? "invert" : "default")">
+                   Theme="@(TableTheme == StoryHelpers.TableThemeEnum.Invert ? "invert" : "default")">
             <PropertyColumn Property=@(f => f.Date)
                             Sortable="@SortDate"
                             Align="@((Align)AlignDate)"
@@ -147,11 +147,6 @@
         Start = 4
     }
 
-    public enum TableThemeEnum
-    {
-        Default,
-        Invert
-    }
 
     /// <summary>
     /// Align date field
@@ -209,7 +204,7 @@
     /// Select theme of table
     /// </summary>
     [Parameter]
-    public TableThemeEnum TableTheme { get; set; }
+    public StoryHelpers.TableThemeEnum TableTheme { get; set; }
 
     /// <summary>
     /// Set a color of the background.

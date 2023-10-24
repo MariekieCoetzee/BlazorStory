@@ -1,0 +1,178 @@
+@using System.ComponentModel.DataAnnotations
+@using System.Text.Json
+@inject IJSRuntime JsRuntime;
+@implements IDisposable;
+
+<div class="container pb-2 "
+     style="background-color: @Color">
+
+    <h3 class="text-center font-weight-light p-2"
+        style="filter:@(TableTheme == StoryHelpers.TableThemeEnum.Invert ? "invert(1)" : "invert(0)")">
+        Quick Grid
+    </h3>
+    <EditForm EditContext="_editContext"
+              @onreset="HandleReset"
+              OnValidSubmit="@HandleValidSubmit"
+              FormName="Story">
+        <DataAnnotationsValidator />
+        <div class="form-row">
+            <div class="form-group col">
+                <label>Title</label>
+                <InputSelect @bind-Value="PersonModel.Title"
+                             class="form-control">
+                    <option value=""></option>
+                    <option value="Mr">Mr</option>
+                    <option value="Mrs">Mrs</option>
+                    <option value="Miss">Miss</option>
+                    <option value="Ms">Ms</option>
+                </InputSelect>
+                <ValidationMessage For="@(() => PersonModel.Title)" />
+            </div>
+            <div class="form-group col-5">
+                <label>Name</label>
+                <InputText type="text"
+                           class="form-control form-control-lg "
+                           placeholder="Type your name here"
+                           @bind-Value="PersonModel!.Name" />
+                <ValidationMessage For="@(() => PersonModel!.Name)" />
+            </div>
+            <div class="form-group col-5">
+                <label>Surname</label>
+                <InputText type="text"
+                           class="form-control form-control-lg "
+                           placeholder="Type your name here"
+                           @bind-Value="PersonModel!.Surname" />
+                <ValidationMessage For="@(() => PersonModel!.Surname)" />
+            </div>
+        </div>
+   <div class="form-row">
+                <div class="form-group col">
+                    <label>Date of Birth</label>
+                    <InputDate @bind-Value="PersonModel.DateOfBirth" class="form-control" />
+                    <ValidationMessage For="@(() => PersonModel.DateOfBirth)" />
+                </div>
+                <div class="form-group col">
+                    <label>Email</label>
+                    <InputText @bind-Value="PersonModel.Email" class="form-control" />
+                    <ValidationMessage For="@(() => PersonModel.Email)" />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label>Password</label>
+                    <InputText @bind-Value="PersonModel.Password" type="password" class="form-control" />
+                    <ValidationMessage For="@(() => PersonModel.Password)" />
+                </div>
+                <div class="form-group col">
+                    <label>Confirm Password</label>
+                    <InputText @bind-Value="PersonModel.ConfirmPassword" type="password" class="form-control" />
+                    <ValidationMessage For="@(() => PersonModel.ConfirmPassword)" />
+                </div>
+            </div>
+            <div class="form-group form-check">
+                <InputCheckbox @bind-Value="PersonModel.AcceptTerms" id="acceptTerms" class="form-check-input" />
+                <label for="acceptTerms" class="form-check-label">Accept Terms & Conditions</label>
+                <ValidationMessage For="@(() => PersonModel.AcceptTerms)" />
+            </div>
+        <div class="form-row">
+            <div class="text-center">
+                <button type="submit"
+                        class="btn btn-primary mr-1 ">Submit</button>
+                <button type="reset"
+                        class="btn btn-secondary">Reset form</button>
+            </div>
+           
+        </div>
+    </EditForm>
+</div>
+
+@code {
+    private EditContext? _editContext;
+
+    [SupplyParameterFromForm]
+    public Person? PersonModel { get; set; }
+
+    /// <summary>
+    /// Set a color of the background.
+    /// </summary>
+    [Parameter]
+    public string Color { get; set; } = "#007bff";
+
+    /// <summary>
+    /// Select theme of table
+    /// </summary>
+    [Parameter]
+    public StoryHelpers.TableThemeEnum TableTheme { get; set; }
+
+    private ValidationMessageStore? _messageStore;
+
+    protected override void OnInitialized()
+    {
+        PersonModel ??= new();
+        _editContext = new(PersonModel);
+        _editContext.OnValidationRequested += HandleValidationRequested;
+    }
+
+    private void HandleValidationRequested(object? sender, ValidationRequestedEventArgs e)
+    {
+        _messageStore?.Clear();
+        if (PersonModel!.MiddleName is null)
+        {
+            _messageStore?.Add(()=> PersonModel.MiddleName, "No middle name??.");
+        }
+    }
+
+    private void HandleValidSubmit()
+    {
+        var modelJson = JsonSerializer.Serialize(PersonModel, new JsonSerializerOptions { WriteIndented = true });
+        JsRuntime.InvokeVoidAsync("alert", $"SUCCESS!! :-)\n\n{modelJson}");
+    }
+
+    private void HandleReset()
+    {
+        PersonModel = new Person();
+        _editContext = new EditContext(PersonModel);
+    }
+    public record Person
+    {
+        [Required]
+        [StringLength(3, ErrorMessage = "The name should be 3 characters!")]
+        public string Name { get; set; }
+        
+        [Required]
+        public string Surname { get; set; }
+        
+        public string MiddleName { get; set; }
+
+        [Required]
+        public string Title { get; set; }
+
+        [Required]
+        [Display(Name = "Date of Birth")]
+        public DateTime? DateOfBirth { get; set; }
+
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+
+        [Required]
+        [MinLength(6, ErrorMessage = "Password must be at least 6 characters")]
+        public string Password { get; set; }
+
+        [Required]
+        [Display(Name = "Confirm Password")]
+        public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Range(typeof(bool), "true", "true", ErrorMessage = "Accept Ts & Cs is required")]
+        public bool AcceptTerms { get; set; }
+    }
+
+    public void Dispose()
+    {
+        if (_editContext is not null)
+        {
+            _editContext.OnValidationRequested -= HandleValidationRequested;
+        }
+    }
+}
