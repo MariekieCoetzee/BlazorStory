@@ -7,7 +7,7 @@
     <PreserveCompilationContext>true</PreserveCompilationContext>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
-    <RootNamespace>StoriesPlaywright.Test</RootNamespace>
+    <RootNamespace>Stories.Playwright.Test</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,7 +22,7 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="..\Blazor.Stories.Server\Blazor.Stories.Server.csproj" />
+    <ProjectReference Include="..\Blazor.Server\Blazor.Server.csproj" />
   </ItemGroup>
 
 </Project>
