@@ -1,0 +1,27 @@
+/*---------------------------*/
+/*  Sidebar customisation*/
+/*---------------------------*/
+.selected {
+    background-color: #d397a3 !important;
+    color: #fff;
+}
+
+.selected:hover {
+    color: #fff;
+    background-color: #98ccd3 !important;
+}
+
+.sidebar:hover {
+    color: #fff;
+    background-color: #98ccd3 !important;
+}
+
+.sidebar {
+    color: #364e68 !important;
+}
+
+.sidebar.disabled, .sidebar:disabled {
+    pointer-events: none;
+    background-color: #fff;
+    color: #6c757d !important;
+}
