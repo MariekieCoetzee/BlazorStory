@@ -1,4 +1,4 @@
-namespace Stories.Playwright.Test.Infrastructure;
+namespace Playwright.Test.Infrastructure;
 
 public class BlazorTest : PageTest
 {

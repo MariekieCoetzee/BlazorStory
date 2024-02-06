@@ -1,7 +1,7 @@
 using System.Text.RegularExpressions;
-using Stories.Playwright.Test.Infrastructure;
+using Playwright.Test.Infrastructure;
 
-namespace Stories.Playwright.Test;
+namespace Playwright.Test;
 
 [Parallelizable(ParallelScope.Self)]
 [TestFixture]

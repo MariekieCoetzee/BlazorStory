@@ -1,78 +1,80 @@
 @inject NavigationManager Navigation
+<div class="container-fluid p-0">
+    <div class="d-flex flex-sm-row flex-column">
+        <div class="sticky-top ">
+            <div class="d-flex flex-sm-column flex-row flex-nowrap bg-light align-items-center sticky-top shadow-lg">
+                <ul class="nav nav-pills nav-flush flex-sm-column flex-row flex-nowrap mb-auto mx-auto text-center justify-content-between w-100 align-items-center">
+                    <li class="sidebar nav-item w-100 @(_selectedLink == "/" ? "selected" : "")"
+                        aria-disabled="false">
+                        <a href="/"
+                           @* @onclick='()=> HandleNavigation("/")' *@
+                           class="nav-link py-3 px-2 "
+                           title="Home"
+                           data-bs-toggle="tooltip"
+                           data-bs-placement="right"
+                           data-bs-original-title="Home">
+                            <i class="bi-house fs-4 sidebar"></i>
+                        </a>
+                    </li>
+                    <li class="sidebar nav-item w-100 @(_selectedLink == "episode" ? "selected" : "")"
+                        aria-disabled="false">
+                        <div class="dropdown">
+                            <a href="/menu1"
+                               @* @onclick='() => HandleNavigation("menu1")' *@
+                               class="nav-link py-3 px-2 d-flex align-items-center justify-content-center p-3 link-dark text-decoration-none dropdown-toggle"
+                               title="Menu1"
+                               id="menu1"
+                               data-bs-toggle="dropdown"
+                               aria-expanded="false"
+                               data-bs-placement="right"
+                               data-bs-original-title="menu1">
+                                <i class="bi bi-person-plus-fill fs-4 sidebar"></i>
+                            </a>
+                            <ul class="dropdown-menu text-small shadow"
+                                aria-labelledby="submenu">
+                                <li>
+                                    <a class="dropdown-item"
+                                       href="">
+                                        Menu option
+                                    </a>
+                                </li>
+                            </ul>
 
-<div class="d-flex flex-sm-column flex-row flex-nowrap bg-light align-items-center sticky-top shadow-lg">
-    <ul class="nav nav-pills nav-flush flex-sm-column flex-row flex-nowrap mb-auto mx-auto text-center justify-content-between w-100 align-items-center">
-        <li class="sidebar nav-item w-100 @(_selectedLink == "/" ? "selected" : "")" aria-disabled="false" >
-            <a href="/"
-              @onclick='()=> HandleNavigation("/")'
-               class="nav-link py-3 px-2 "
-               title="Journey board"
-               data-bs-toggle="tooltip"
-               data-bs-placement="right"
-               data-bs-original-title="Journey board">
-                <i class="bi-house fs-4 sidebar"></i>
-            </a>
-        </li>
-        <li class="sidebar nav-item w-100 @(_selectedLink == "episode" ? "selected" : "")"
-            aria-disabled="false">
-            <div class="dropdown">
-                <a href="/episode"
-                   @onclick='() => HandleNavigation("episode")'
-                   class="nav-link py-3 px-2 d-flex align-items-center justify-content-center p-3 link-dark text-decoration-none dropdown-toggle"
-                   title="Add Consumer"
-                   id="sidebarAddConsumer"
-                   data-bs-toggle="dropdown"
-                   aria-expanded="false"
-                   data-bs-placement="right"
-                   data-bs-original-title="Add Consumer">
-                    <i class="bi bi-person-plus-fill fs-4 sidebar"></i>
-                </a>
-               <ul class="dropdown-menu text-small shadow"
-                   aria-labelledby="sidebarAddConsumer">
-                   <li>
-                       <a class="dropdown-item"
-                          href="">
-                           Add manual
-                       </a>
-                   </li>
-               </ul>
+                        </div>
+                    </li>
+                    <li class="sidebar nav-item w-100 @(_selectedLink == "example1_url" ? "selected" : "") @(_example1Disable ? "disabled" : "")"
+                        aria-disabled="@(_example1Disable ? "true" : "false")">
+                        <a href="example1_url"
+                           @* @onclick='() => HandleNavigation("example1_url")' *@
+                           class="nav-link py-3 px-2"
+                           title="Example 1"
+                           data-bs-toggle="tooltip"
+                           data-bs-placement="right"
+                           data-bs-original-title="Example 1">
+                            <span class="sr-only">
+                                <i class="bi bi-box-arrow-in-down-left sidebar fs-2"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="sidebar nav-item w-100 @(_selectedLink == "example2_url" ? "selected" : "")">
+                        <a href="example2_url"
+                           @* @onclick='() => HandleNavigation("example2_url")' *@
+                           class="nav-link py-3 px-2"
+                           title="Example 2"
+                           data-bs-toggle="tooltip"
+                           data-bs-placement="right"
+                           data-bs-original-title="Example 2">
+                            <span class="sr-only">
+                                <i class="bi bi-box-arrow-up-right sidebar fs-2"></i>
+                            </span>
+                        </a>
+                    </li>
 
+                </ul>
             </div>
-        </li>
-        <li class="sidebar nav-item w-100 @(_selectedLink == "example1_url" ? "selected" : "") @(_example1Disable ? "disabled" : "")" aria-disabled="@(_example1Disable ? "true" : "false")">
-            <a href="example1_url"
-               @onclick='() => HandleNavigation("example1_url")'
-               class="nav-link py-3 px-2"
-               title="Example 1"
-               data-bs-toggle="tooltip"
-               data-bs-placement="right"
-               data-bs-original-title="Example 1">
-                <span class="sr-only">
-                    <i class="bi bi-box-arrow-in-down-left sidebar fs-2"></i>
-                </span>
-                <span class="position-absolute start-100 translate-middle badge rounded-pill bg-danger">
-                    1
-                    <span class="visually-hidden">outstanding</span>
-                </span>
-            </a>
-        </li>
-        <li class="sidebar nav-item w-100 @(_selectedLink == "example2_url" ? "selected" : "")">
-            <a href="example2_url"
-               @onclick='() => HandleNavigation("example2_url")'
-               class="nav-link py-3 px-2"
-               title="Example 2"
-               data-bs-toggle="tooltip"
-               data-bs-placement="right"
-               data-bs-original-title="Example 2">
-                <span class="sr-only">
-                    <i class="bi bi-box-arrow-up-right sidebar fs-2"></i>
-                </span>
-            </a>
-        </li>
-        
-    </ul>
+        </div>
+    </div>
 </div>
-
 @code {
 
     private string? _selectedLink = "/";
