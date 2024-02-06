@@ -1,0 +1,16 @@
+@attribute [Stories("PlaceHolders/ChatPlaceHolder")]
+
+<Stories TComponent="ChatPlaceHolder">
+    <ArgType For="_ => _!.Color"
+             Control="ControlType.Color" />
+    <ArgType For="_ => _!.TextColor"
+             Control="ControlType.Color" />
+
+    <Story Name="Default">
+        <Template>
+            <ChatPlaceHolder Color="#9a9898" TextColor="#fff"
+                         @attributes="context.Args"></ChatPlaceHolder>
+        </Template>
+    </Story>
+
+</Stories>

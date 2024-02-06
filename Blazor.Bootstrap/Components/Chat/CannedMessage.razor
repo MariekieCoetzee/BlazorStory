@@ -1,0 +1,27 @@
+<div class="container m-1" style="background-color: @Color; color: @TextColor" >
+    <h3 class="display-6">Canned Message</h3>
+    <hr />
+    <ul class="list-group">
+        <li class="p-2 list-group-item list-group-item-action list-group-item-info" style="cursor:pointer "><i class="bi bi-heart-fill me-2"></i>You can visit in ICU Visiting hours</li>
+        <li class="p-2 list-group-item list-group-item-action list-group-item-info" style="cursor:pointer "><i class="bi bi-heart-fill me-2"></i>Thanks, we will call you ASAP</li>
+        <li class="p-2 list-group-item list-group-item-action list-group-item-info" style="cursor:pointer "><i class="bi bi-heart-fill me-2"></i>Thanks for letting us know</li>
+        <li class="p-2 list-group-item list-group-item-action list-group-item-info" style="cursor:pointer "><i class="bi bi-heart-fill me-2"></i>Please maintain respectful lang</li>
+    </ul>
+</div>
+
+
+@code {
+
+    /// <summary>
+    /// Set a color of the background.
+    /// </summary>
+    [Parameter]
+    public string Color { get; set; } = "#0d6efd";
+
+    /// <summary>
+    /// Set the color of the text.
+    /// </summary>
+    [Parameter]
+    public string TextColor { get; set; } = "#fff";
+
+}

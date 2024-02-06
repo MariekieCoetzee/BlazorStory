@@ -1,0 +1,56 @@
+<div class="container placeholder-glow bg-white">
+    <div class="d-flex align-items-center p-2">
+        <span class="rounded-circle p-2 me-1 fw-bold bg-success text-center placeholder"
+              style="background-color: @Color; color: @TextColor; width: 4rem; height:4rem">
+        </span>
+        <div class="d-flex flex-column w-100">
+            <div class="mb-1 placeholder w-25 bg-secondary"> </div>
+            <div class="placeholder w-50 bg-secondary"></div>
+        </div>
+    </div>
+    <div class="d-flex flex-column ms-5 me-5 rounded bg-light p-1" >
+        <div class="flex-grow-1  p-3">
+            <div class="d-flex align-items-center mb-3 flex-row-reverse  justify-content-end">
+                <span class="placeholder rounded-circle p-2  bg-primary "
+                      style="width:3rem; height: 3rem">
+                </span>
+                <div class="text-end me-2 w-75">
+                    <span class="placeholder  placeholder-xs bg-secondary w-25"></span>
+                    <div class="d-flex flex-column rounded-3 p-3 border-dark w-75 ms-auto bg-primary placeholder">
+                        <span class="w-25 placeholder placeholder-xs mb-1 align-self-end "></span>
+                        <span class="w-75 placeholder placeholder-xs align-self-end"></span>
+                    </div>
+                </div>
+            </div>
+            @* --------- *@
+            <div class="d-flex align-items-center mb-3 w-75">
+                <span class="placeholder rounded-circle p-2 me-1  bg-danger"
+                      style="width:3rem; height: 3rem">
+                </span>
+                <div class="w-75">
+                    <span class="placeholder  placeholder-xs bg-secondary w-25 ps-1"></span>
+                    <div class="d-flex flex-column rounded-3 border-dark w-100 bg-danger placeholder p-3">
+                        <span class="w-50 placeholder placeholder-xs mb-1"></span>
+                        <span class="w-25 placeholder placeholder-xs"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code {
+
+    /// <summary>
+    /// Set a color of the background.
+    /// </summary>
+    [Parameter]
+    public string Color { get; set; } = "#0d6efd";
+
+    /// <summary>
+    /// Set the color of the text.
+    /// </summary>
+    [Parameter]
+    public string TextColor { get; set; } = "#fff";
+}
